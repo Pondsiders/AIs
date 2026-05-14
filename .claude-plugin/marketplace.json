@@ -1,0 +1,14 @@
+{
+  "name": "AIs",
+  "owner": {
+    "name": "Jeffery Harrell",
+    "email": "jefferyharrell@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "Alpha",
+      "source": "./Alpha",
+      "description": "Alpha"
+    }
+  ]
+}

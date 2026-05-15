@@ -8,6 +8,8 @@ dependencies = [
     "fastmcp>=2.0",
     "openai>=1.0",
     "pendulum>=3.0",
+    "pgvector>=0.3",
+    "psycopg[binary]>=3.3",
     "pydantic>=2.0",
     "pydantic-settings>=2.0",
 ]
@@ -20,7 +22,6 @@ dev = [
     "asyncpg-stubs>=0.31",
     "basedpyright>=1.20",
     "pre-commit>=3.7",
-    "psycopg[binary]>=3.3",
     "pytest>=8.0",
     "pytest-asyncio>=0.24",
     "ruff>=0.6",

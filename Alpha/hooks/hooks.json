@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uv run --directory ${CLAUDE_PLUGIN_ROOT}/mechanism session-start-hook"
+            "command": "UV_PROJECT_ENVIRONMENT=${CLAUDE_PLUGIN_DATA}/mechanism/.venv uv run --directory ${CLAUDE_PLUGIN_ROOT}/mechanism session-start-hook"
           }
         ]
       }
@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uv run --directory ${CLAUDE_PLUGIN_ROOT}/mechanism user-prompt-submit-hook"
+            "command": "UV_PROJECT_ENVIRONMENT=${CLAUDE_PLUGIN_DATA}/mechanism/.venv uv run --directory ${CLAUDE_PLUGIN_ROOT}/mechanism user-prompt-submit-hook"
           }
         ]
       }
@@ -26,7 +26,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uv run --directory ${CLAUDE_PLUGIN_ROOT}/mechanism stop-hook"
+            "command": "UV_PROJECT_ENVIRONMENT=${CLAUDE_PLUGIN_DATA}/mechanism/.venv uv run --directory ${CLAUDE_PLUGIN_ROOT}/mechanism stop-hook"
           }
         ]
       }

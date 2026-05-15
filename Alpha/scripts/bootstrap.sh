@@ -22,13 +22,9 @@ chmod 700 "$CONFIG_DIR"
 
 cat > "$ENV_FILE" <<'EOF'
 # alpha-mechanism configuration.
-# Edit these values before running `claude`.
+# Edit this value before running `claude`.
 
 DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
-
-# PROD_DATABASE_URL is only needed for `copy-from-prod`. Leave commented
-# out in production runtime.
-# PROD_DATABASE_URL=postgresql://alpha_reader:PASSWORD@HOST:PORT/DATABASE
 EOF
 
 chmod 600 "$ENV_FILE"

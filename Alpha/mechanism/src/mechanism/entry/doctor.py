@@ -18,10 +18,6 @@ def main() -> None:
         print(str(exc), file=sys.stderr)
         sys.exit(1)
 
-    prod_repr = (
-        str(settings.prod_database_url) if settings.prod_database_url is not None else "(unset)"
-    )
     print("Settings loaded.")
-    print(f"  database_url:      {settings.database_url}")
-    print(f"  prod_database_url: {prod_repr}")
+    print(f"  database_url: {settings.database_url}")
     print("OK")

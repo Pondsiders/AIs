@@ -32,7 +32,6 @@ session-start-hook = "mechanism.entry.session_start:main"
 user-prompt-submit-hook = "mechanism.entry.user_prompt_submit:main"
 stop-hook = "mechanism.entry.stop:main"
 doctor = "mechanism.entry.doctor:main"
-copy-from-prod = "mechanism.scripts.copy_from_prod:main"
 
 [build-system]
 requires = ["hatchling"]

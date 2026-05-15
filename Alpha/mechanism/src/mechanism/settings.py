@@ -27,7 +27,6 @@ class Settings(BaseSettings):
     )
 
     database_url: PostgresDsn
-    prod_database_url: PostgresDsn | None = None
 
 
 @lru_cache

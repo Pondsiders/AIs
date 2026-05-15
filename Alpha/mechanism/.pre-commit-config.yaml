@@ -1,0 +1,25 @@
+# Pre-commit hooks for alpha-mechanism.
+#
+# Install per clone (from this directory):
+#   uv sync --extra dev
+#   uv run pre-commit install
+#
+# Run manually against everything:
+#   uv run pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: basedpyright
+        name: basedpyright
+        entry: uv run --project Alpha/mechanism basedpyright
+        language: system
+        types: [python]
+        pass_filenames: false

@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Stop hook — decides whether the agent is allowed to stop."""
+
 import json
 import sys
 
 
 def main() -> int:
+    """Approve every Stop request; cadence logic lands in a later commit."""
     output = {
         "decision": "approve",
         "reason": "okay to stop",

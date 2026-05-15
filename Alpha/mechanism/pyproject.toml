@@ -1,0 +1,86 @@
+[project]
+name = "alpha-mechanism"
+version = "0.0.1"
+description = "Alpha's apparatus — Cortex MCP server, embeddings, hook scripts, dev-database choreography."
+requires-python = ">=3.12"
+dependencies = [
+    "asyncpg>=0.30",
+    "fastmcp>=2.0",
+    "openai>=1.0",
+    "pendulum>=3.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+]
+
+[project.optional-dependencies]
+# Dev tooling. Not installed by plain `uv sync` (which is what production
+# runs after `/plugin install`). Install locally with `uv sync --extra dev`.
+dev = [
+    "alembic>=1.13",
+    "asyncpg-stubs>=0.31",
+    "basedpyright>=1.20",
+    "pre-commit>=3.7",
+    "psycopg[binary]>=3.3",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+session-start-hook = "mechanism.entry.session_start:main"
+user-prompt-submit-hook = "mechanism.entry.user_prompt_submit:main"
+stop-hook = "mechanism.entry.stop:main"
+copy-from-prod = "mechanism.scripts.copy_from_prod:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes (undefined names, unused imports, etc.)
+    "I",    # isort (import ordering)
+    "B",    # flake8-bugbear (likely bugs)
+    "UP",   # pyupgrade (modern Python idioms)
+    "S",    # flake8-bandit (security)
+    "SIM",  # flake8-simplify (simplifications)
+    "RUF",  # Ruff-specific
+    "D",    # pydocstyle (docstring presence + style)
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+# Package __init__.py docstrings optional — most of ours are bare re-exports.
+"__init__.py" = ["D104"]
+# __main__.py is an entry-point shim, not API surface.
+"__main__.py" = ["D100"]
+# Alembic migration files use a generated docstring header.
+"alembic/versions/*.py" = ["D415"]
+# Tests use `assert` (S101) and don't need module/class/method docstrings.
+"tests/**/*.py" = ["S101", "D100", "D101", "D102", "D103"]
+
+[tool.basedpyright]
+include = ["src", "tests", "alembic"]
+pythonVersion = "3.12"
+typeCheckingMode = "recommended"
+reportMissingImports = "error"
+
+# `Any` is the honest type for the wire boundary — JSON arrives shape-unknown
+# and Pydantic narrows it. We're a two-person workshop; we don't need a
+# linter babysitting our use of `Any` at boundaries we control.
+reportExplicitAny = false
+reportAny = false
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mechanism"]

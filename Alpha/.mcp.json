@@ -1,0 +1,18 @@
+{
+    "mcpServers": {
+        "alpha": {
+            "command": "uv",
+            "args": [
+                "run",
+                "--directory",
+                "${CLAUDE_PLUGIN_ROOT}/mechanism",
+                "fastmcp",
+                "run",
+                "src/mechanism/cortex_server/__init__.py"
+            ],
+            "env": {
+                "UV_PROJECT_ENVIRONMENT": "${CLAUDE_PLUGIN_DATA}/mechanism/.venv"
+            }
+        }
+    }
+}

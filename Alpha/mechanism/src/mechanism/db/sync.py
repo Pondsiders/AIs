@@ -21,6 +21,7 @@ def open() -> Generator[psycopg.Connection, None, None]:
     """Open a connection to the database with pgvector registered."""
     conn = psycopg.connect(str(get_settings().database_url))
     try:
+        _ = conn.execute("SET search_path TO public, extensions")
         register_vector(conn)
         yield conn
     finally:

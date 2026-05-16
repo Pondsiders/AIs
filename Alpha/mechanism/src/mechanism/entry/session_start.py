@@ -6,15 +6,20 @@ import json
 import sys
 import traceback
 
+from mechanism.diary import pages_since_yesterday
+
 
 def main() -> None:
     """Handle a SessionStart hook invocation from Claude Code."""
     try:
+        yesterday, today = pages_since_yesterday()
+        pages = [p for p in (yesterday, today) if p is not None]
+        additional_context = "\n\n".join(pages)
         json.dump(
             {
                 "hookSpecificOutput": {
                     "hookEventName": "SessionStart",
-                    "additionalContext": "",
+                    "additionalContext": additional_context,
                 },
             },
             sys.stdout,
